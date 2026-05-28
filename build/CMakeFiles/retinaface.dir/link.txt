@@ -1,0 +1,2 @@
+/usr/bin/ar qc libretinaface.a CMakeFiles/retinaface.dir/3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.cc.o
+/usr/bin/ranlib libretinaface.a
