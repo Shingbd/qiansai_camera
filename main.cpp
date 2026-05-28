@@ -60,13 +60,12 @@ int main(int argc, char *argv[])
     const std::string cam_pipe =
         "v4l2src device=/dev/video0 do-timestamp=true ! "
         "video/x-raw,width=800,height=480,framerate=30/1 ! "
-        "videoconvert ! videoflip method=clockwise ! "
-        "video/x-raw,format=NV12 ! "
+        "videoconvert ! video/x-raw,format=NV12 ! "
         "appsink name=sink_ai max-buffers=1 drop=true";
 
     const std::string display_pipe =
         "appsrc name=local_src is-live=true format=time ! "
-        "videoconvert ! videoflip method=rotate-180 ! queue ! kmssink sync=false";
+        "videoconvert ! videoflip method=clockwise ! videoflip method=rotate-180 ! queue ! kmssink sync=false";
 
     std::cout << "Camera pipeline: " << cam_pipe << std::endl;
 
