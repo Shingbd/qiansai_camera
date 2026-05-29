@@ -11,8 +11,10 @@
 #include "retinaface.h"
 #include "image_utils.h"
 #include "image_drawing.h"
+#include "serial_port.h"
 
 rknn_app_context_t g_rknn_ctx;
+int g_serial_fd = -1;
 std::atomic<bool> g_running{true};
 
 static gboolean bus_call(GstBus *bus, GstMessage *msg, gpointer data)
@@ -41,14 +43,15 @@ static gboolean bus_call(GstBus *bus, GstMessage *msg, gpointer data)
 
 int main(int argc, char *argv[])
 {
-    if (argc != 2) {
-        printf("Usage: %s <rknn_model_path>\n", argv[0]);
+    if (argc < 2 || argc > 3) {
+        printf("Usage: %s <rknn_model_path> [serial_device]\n", argv[0]);
         return -1;
     }
 
     gst_init(&argc, &argv);
 
     const char *model_path = argv[1];
+    const char *serial_dev = (argc == 3) ? argv[2] : "/dev/ttyS0";
     memset(&g_rknn_ctx, 0, sizeof(rknn_app_context_t));
     int ret = init_retinaface_model(model_path, &g_rknn_ctx);
     if (ret != 0) {
@@ -56,6 +59,11 @@ int main(int argc, char *argv[])
         return 1;
     }
     std::cout << "RetinaFace model loaded: " << model_path << std::endl;
+
+    g_serial_fd = serial_init(serial_dev, 115200);
+    if (g_serial_fd < 0) {
+        std::cerr << "Warning: serial port init failed, continuing without serial" << std::endl;
+    }
 
     const std::string cam_pipe =
         "v4l2src device=/dev/video0 do-timestamp=true ! "
@@ -65,7 +73,7 @@ int main(int argc, char *argv[])
 
     const std::string display_pipe =
         "appsrc name=local_src is-live=true format=time ! "
-        "videoconvert ! videoflip method=clockwise ! videoflip method=rotate-180 ! queue ! kmssink sync=false";
+        "videoflip method=counterclockwise ! kmssink sync=false";
 
     std::cout << "Camera pipeline: " << cam_pipe << std::endl;
 
@@ -158,7 +166,11 @@ int main(int argc, char *argv[])
             auto t2 = std::chrono::steady_clock::now();
             int infer_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
 
+            int16_t x_diff = 0, y_diff = 0;
             if (infer_ret == 0) {
+                int best_idx = -1;
+                float best_score = 0.0f;
+
                 for (int i = 0; i < result.count; ++i) {
                     int rx = result.object[i].box.left;
                     int ry = result.object[i].box.top;
@@ -171,7 +183,23 @@ int main(int argc, char *argv[])
                     for (int j = 0; j < 5; j++) {
                         draw_circle(&src_img, result.object[i].ponit[j].x, result.object[i].ponit[j].y, 2, COLOR_ORANGE, 4);
                     }
+
+                    if (result.object[i].score > best_score) {
+                        best_score = result.object[i].score;
+                        best_idx = i;
+                    }
                 }
+
+                if (best_idx >= 0) {
+                    int cx = (result.object[best_idx].box.left + result.object[best_idx].box.right) / 2;
+                    int cy = (result.object[best_idx].box.top  + result.object[best_idx].box.bottom) / 2;
+                    x_diff = (int16_t)(cx - w / 2);
+                    y_diff = (int16_t)(cy - h / 2);
+                }
+            }
+
+            if (g_serial_fd >= 0) {
+                serial_send_packet(g_serial_fd, x_diff, y_diff);
             }
 
             {
@@ -183,7 +211,11 @@ int main(int argc, char *argv[])
             gst_buffer_unmap(buf, &info);
 
             if (local_src) {
+                auto t_push = std::chrono::steady_clock::now();
                 gst_app_src_push_buffer(GST_APP_SRC(local_src), buf);
+                auto push_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                    std::chrono::steady_clock::now() - t_push).count();
+                if (push_ms > 5) std::cout << "push_blocked=" << push_ms << "ms" << std::endl;
             } else {
                 gst_buffer_unref(buf);
             }
@@ -212,6 +244,7 @@ int main(int argc, char *argv[])
     gst_object_unref(display_pipeline);
     g_main_loop_unref(loop);
 
+    serial_close(g_serial_fd);
     release_retinaface_model(&g_rknn_ctx);
 
     return 0;

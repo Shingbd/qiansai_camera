@@ -10,6 +10,11 @@
   "file": "/Users/shingbd/workspace/qiansai/main.cpp"
 },
 {
+  "directory": "/Users/shingbd/workspace/qiansai/build",
+  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/examples/RetinaFace/cpp -I/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils -I/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/qiansai.dir/serial_port.cpp.o -c /Users/shingbd/workspace/qiansai/serial_port.cpp",
+  "file": "/Users/shingbd/workspace/qiansai/serial_port.cpp"
+},
+{
   "directory": "/Users/shingbd/workspace/qiansai/build/utils.out",
   "command": "/usr/bin/cc -DLIBRGA_IM2D_HANDLE -I/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils  -o CMakeFiles/fileutils.dir/file_utils.c.o -c /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/file_utils.c",
   "file": "/Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/file_utils.c"

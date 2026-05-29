@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/qiansai.dir/main.cpp.o"
   "CMakeFiles/qiansai.dir/main.cpp.o.d"
+  "CMakeFiles/qiansai.dir/serial_port.cpp.o"
+  "CMakeFiles/qiansai.dir/serial_port.cpp.o.d"
   "qiansai"
   "qiansai.pdb"
 )

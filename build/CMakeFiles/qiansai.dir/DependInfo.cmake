@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/shingbd/workspace/qiansai/main.cpp" "CMakeFiles/qiansai.dir/main.cpp.o" "gcc" "CMakeFiles/qiansai.dir/main.cpp.o.d"
+  "/Users/shingbd/workspace/qiansai/serial_port.cpp" "CMakeFiles/qiansai.dir/serial_port.cpp.o" "gcc" "CMakeFiles/qiansai.dir/serial_port.cpp.o.d"
   )
 
 # Targets to which this target links.

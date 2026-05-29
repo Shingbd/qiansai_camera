@@ -395,4 +395,5 @@ CMakeFiles/qiansai.dir/main.cpp.o: \
  /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/common.h \
  /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/image_utils.h \
  /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/common.h \
- /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/image_drawing.h
+ /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/image_drawing.h \
+ /Users/shingbd/workspace/qiansai/serial_port.h

@@ -36,7 +36,7 @@ target_include_directories(retinaface PUBLIC
 
 target_link_libraries(retinaface fileutils imageutils)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp serial_port.cpp)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${GST_INCLUDE_DIRS}

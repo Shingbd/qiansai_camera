@@ -287,6 +287,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+serial_port.o: serial_port.cpp.o
+.PHONY : serial_port.o
+
+# target to build an object file
+serial_port.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/serial_port.cpp.o
+.PHONY : serial_port.cpp.o
+
+serial_port.i: serial_port.cpp.i
+.PHONY : serial_port.i
+
+# target to preprocess a source file
+serial_port.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/serial_port.cpp.i
+.PHONY : serial_port.cpp.i
+
+serial_port.s: serial_port.cpp.s
+.PHONY : serial_port.s
+
+# target to generate assembly for a file
+serial_port.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/serial_port.cpp.s
+.PHONY : serial_port.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -311,6 +335,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... serial_port.o"
+	@echo "... serial_port.i"
+	@echo "... serial_port.s"
 .PHONY : help
 
 
