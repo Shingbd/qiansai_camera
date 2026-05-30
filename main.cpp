@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     gst_init(&argc, &argv);
 
     const char *model_path = argv[1];
-    const char *serial_dev = (argc == 3) ? argv[2] : "/dev/ttyS0";
+    const char *serial_dev = (argc == 3) ? argv[2] : "/dev/ttyS3";
     memset(&g_rknn_ctx, 0, sizeof(rknn_app_context_t));
     int ret = init_retinaface_model(model_path, &g_rknn_ctx);
     if (ret != 0) {
@@ -195,11 +195,32 @@ int main(int argc, char *argv[])
                     int cy = (result.object[best_idx].box.top  + result.object[best_idx].box.bottom) / 2;
                     x_diff = (int16_t)(cx - w / 2);
                     y_diff = (int16_t)(cy - h / 2);
+                    char diff_text[32];
+                    snprintf(diff_text, 32, "%d,%d", x_diff, y_diff);
+                    draw_text(&src_img, diff_text,
+                              result.object[best_idx].box.right,
+                              result.object[best_idx].box.top,
+                              COLOR_YELLOW, 20);
                 }
             }
 
             if (g_serial_fd >= 0) {
                 serial_send_packet(g_serial_fd, x_diff, y_diff);
+                // loopback: read back and print
+                uint8_t rx_buf[SERIAL_PACKET_SIZE];
+                int n = 0;
+                while (n < SERIAL_PACKET_SIZE) {
+                    int r = serial_read_byte(g_serial_fd, &rx_buf[n]);
+                    if (r > 0) n++;
+                    else break;
+                }
+                if (n == SERIAL_PACKET_SIZE) {
+                    serial_packet_t *pkt = (serial_packet_t *)rx_buf;
+                    printf("SERIAL TX: %02X %02X %d %d %02X %02X\n",
+                           pkt->header[0], pkt->header[1],
+                           pkt->x_diff, pkt->y_diff,
+                           pkt->checksum, pkt->footer);
+                }
             }
 
             {
@@ -212,15 +233,14 @@ int main(int argc, char *argv[])
 
             if (local_src) {
                 auto t_push = std::chrono::steady_clock::now();
-                gst_app_src_push_buffer(GST_APP_SRC(local_src), buf);
+                GstFlowReturn ret = gst_app_src_push_buffer(GST_APP_SRC(local_src), buf);
                 auto push_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
                     std::chrono::steady_clock::now() - t_push).count();
                 if (push_ms > 5) std::cout << "push_blocked=" << push_ms << "ms" << std::endl;
+                if (ret == GST_FLOW_OK) frame_count++;
             } else {
                 gst_buffer_unref(buf);
             }
-
-            frame_count++;
             auto now = std::chrono::steady_clock::now();
             float elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_time).count() / 1000.f;
             if (elapsed >= 5.0f) {
