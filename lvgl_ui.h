@@ -15,3 +15,5 @@ bool lvgl_ui_is_recording();
 
 void lvgl_ui_set_cam_rotation(int rot);
 void lvgl_ui_set_cam_mirror_h(bool on);
+
+void lvgl_ui_set_on_photo_req(std::function<void()> cb);

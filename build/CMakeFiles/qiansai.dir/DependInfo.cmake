@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/shingbd/workspace/qiansai/lvgl_ui.cpp" "CMakeFiles/qiansai.dir/lvgl_ui.cpp.o" "gcc" "CMakeFiles/qiansai.dir/lvgl_ui.cpp.o.d"
   "/Users/shingbd/workspace/qiansai/main.cpp" "CMakeFiles/qiansai.dir/main.cpp.o" "gcc" "CMakeFiles/qiansai.dir/main.cpp.o.d"
+  "/Users/shingbd/workspace/qiansai/photo.cpp" "CMakeFiles/qiansai.dir/photo.cpp.o" "gcc" "CMakeFiles/qiansai.dir/photo.cpp.o.d"
   "/Users/shingbd/workspace/qiansai/recorder.cpp" "CMakeFiles/qiansai.dir/recorder.cpp.o" "gcc" "CMakeFiles/qiansai.dir/recorder.cpp.o.d"
   "/Users/shingbd/workspace/qiansai/serial_port.cpp" "CMakeFiles/qiansai.dir/serial_port.cpp.o" "gcc" "CMakeFiles/qiansai.dir/serial_port.cpp.o.d"
   )

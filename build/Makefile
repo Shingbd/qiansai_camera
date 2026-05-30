@@ -337,6 +337,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+photo.o: photo.cpp.o
+.PHONY : photo.o
+
+# target to build an object file
+photo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/photo.cpp.o
+.PHONY : photo.cpp.o
+
+photo.i: photo.cpp.i
+.PHONY : photo.i
+
+# target to preprocess a source file
+photo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/photo.cpp.i
+.PHONY : photo.cpp.i
+
+photo.s: photo.cpp.s
+.PHONY : photo.s
+
+# target to generate assembly for a file
+photo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/photo.cpp.s
+.PHONY : photo.cpp.s
+
 recorder.o: recorder.cpp.o
 .PHONY : recorder.o
 
@@ -414,6 +438,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... photo.o"
+	@echo "... photo.i"
+	@echo "... photo.s"
 	@echo "... recorder.o"
 	@echo "... recorder.i"
 	@echo "... recorder.s"

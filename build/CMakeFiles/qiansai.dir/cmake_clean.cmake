@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/qiansai.dir/lvgl_ui.cpp.o.d"
   "CMakeFiles/qiansai.dir/main.cpp.o"
   "CMakeFiles/qiansai.dir/main.cpp.o.d"
+  "CMakeFiles/qiansai.dir/photo.cpp.o"
+  "CMakeFiles/qiansai.dir/photo.cpp.o.d"
   "CMakeFiles/qiansai.dir/recorder.cpp.o"
   "CMakeFiles/qiansai.dir/recorder.cpp.o.d"
   "CMakeFiles/qiansai.dir/serial_port.cpp.o"

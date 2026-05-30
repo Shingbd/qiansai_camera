@@ -20,9 +20,11 @@ extern "C" {
 
 static std::function<void()> g_on_rec_start;
 static std::function<void()> g_on_rec_stop;
+static std::function<void()> g_on_photo_req;
 
 void lvgl_ui_set_on_rec_start(std::function<void()> cb) { g_on_rec_start = std::move(cb); }
 void lvgl_ui_set_on_rec_stop(std::function<void()> cb)  { g_on_rec_stop  = std::move(cb); }
+void lvgl_ui_set_on_photo_req(std::function<void()> cb) { g_on_photo_req = std::move(cb); }
 
 // ---------------------------------------------------------------------------
 // NV12 → RGB565 conversion with optional rotation
@@ -112,6 +114,11 @@ static void on_record_btn_click(lv_event_t *e) {
     }
 }
 
+static void on_photo_btn_click(lv_event_t *e) {
+    (void)e;
+    if (g_on_photo_req) g_on_photo_req();
+}
+
 static void timer_update_cb(lv_timer_t *t) {
     (void)t;
 
@@ -175,6 +182,21 @@ static void create_ui() {
     g_rec_label = lv_label_create(g_rec_btn);
     lv_label_set_text(g_rec_label, "");
     lv_obj_center(g_rec_label);
+
+    // Photo button to the right of record button
+    lv_obj_t *photo_btn = lv_button_create(scr);
+    lv_obj_add_style(photo_btn, &btn_style, 0);
+    lv_obj_set_size(photo_btn, 60, 60);
+    lv_obj_set_style_radius(photo_btn, LV_RADIUS_CIRCLE, 0);
+    lv_obj_set_style_bg_color(photo_btn, lv_color_make(0xFF, 0xFF, 0xFF), 0);
+    lv_obj_set_style_bg_color(photo_btn, lv_color_make(0x33, 0x33, 0x33), LV_STATE_PRESSED);
+    lv_obj_align_to(photo_btn, g_rec_btn, LV_ALIGN_OUT_RIGHT_MID, 24, 0);
+    lv_obj_add_event_cb(photo_btn, on_photo_btn_click, LV_EVENT_CLICKED, nullptr);
+
+    lv_obj_t *photo_label = lv_label_create(photo_btn);
+    lv_label_set_text(photo_label, "PHOTO");
+    lv_obj_set_style_text_color(photo_label, lv_color_hex(0xFFFFFF), 0);
+    lv_obj_center(photo_label);
 
     // Timer label at top center
     g_timer_label = lv_label_create(scr);

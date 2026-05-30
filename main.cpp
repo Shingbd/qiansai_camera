@@ -13,10 +13,14 @@
 #include "serial_port.h"
 #include "lvgl_ui.h"
 #include "recorder.h"
+#include "photo.h"
 
 rknn_app_context_t g_rknn_ctx;
 int g_serial_fd = -1;
 std::atomic<bool> g_running{true};
+static std::atomic<bool> g_photo_req{false};
+static const uint8_t *g_photo_data = nullptr;
+static int g_photo_w = 0, g_photo_h = 0;
 
 static gboolean bus_call(GstBus *bus, GstMessage *msg, gpointer data)
 {
@@ -74,6 +78,7 @@ int main(int argc, char *argv[])
     const char *env_lvgl_rot = getenv("LVGL_ROTATION");
     if (env_lvgl_rot) lvgl_rotation = atoi(env_lvgl_rot);
     lvgl_ui_init(0, 0, lvgl_rotation);
+    lvgl_ui_set_on_photo_req([]() { g_photo_req = true; });
 
     // AI uses the original (unrotated) frame; display rotation is done in software
     const std::string cam_pipe =
@@ -215,6 +220,14 @@ int main(int argc, char *argv[])
             // Push to recorder if recording
             if (lvgl_ui_is_recording()) {
                 recorder_push_frame(info.data, w, h);
+            }
+
+            // Capture photo if requested
+            if (g_photo_req.exchange(false)) {
+                std::string path = photo_capture(info.data, w, h, "/tmp");
+                if (!path.empty()) {
+                    printf("PHOTO: %s\n", path.c_str());
+                }
             }
 
             gst_buffer_unmap(buf, &info);

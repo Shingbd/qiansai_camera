@@ -40,7 +40,7 @@ target_link_libraries(retinaface fileutils imageutils)
 set(qiansai_sources main.cpp serial_port.cpp)
 
 if (ENABLE_LVGL_UI)
-    list(APPEND qiansai_sources lvgl_ui.cpp recorder.cpp)
+    list(APPEND qiansai_sources lvgl_ui.cpp recorder.cpp photo.cpp)
 endif()
 
 if (ENABLE_LVGL_UI)
