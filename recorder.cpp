@@ -109,27 +109,27 @@ void recorder_stop() {
 
     g_recording = false;
 
-    if (g_appsrc) {
+    int sec = (int)std::chrono::duration_cast<std::chrono::seconds>(
+        std::chrono::steady_clock::now() - g_start_time).count();
+
+    if (g_appsrc && g_pipeline) {
         gst_app_src_end_of_stream(GST_APP_SRC(g_appsrc));
         gst_object_unref(g_appsrc);
         g_appsrc = nullptr;
-    }
 
-    if (g_pipeline) {
+        // Wait for EOS so mp4mux can write the moov box
         GstBus *bus = gst_element_get_bus(g_pipeline);
         if (bus) {
-            while (gst_bus_have_pending(bus))
-                gst_bus_pop(bus);
+            gst_bus_timed_pop_filtered(bus, GST_SECOND * 2,
+                (GstMessageType)(GST_MESSAGE_EOS | GST_MESSAGE_ERROR));
             gst_object_unref(bus);
         }
 
-        gst_element_send_event(g_pipeline, gst_event_new_eos());
         gst_element_set_state(g_pipeline, GST_STATE_NULL);
         gst_object_unref(g_pipeline);
         g_pipeline = nullptr;
     }
 
-    int sec = recorder_get_duration_sec();
     int frames = g_frame_count.load();
     printf("Recording saved: %s (%d frames, %d sec)\n", g_filename, frames, sec);
 }

@@ -114,17 +114,20 @@ static void on_record_btn_click(lv_event_t *e) {
 
 static void timer_update_cb(lv_timer_t *t) {
     (void)t;
-    if (!g_timer_label) return;
 
-    if (recorder_is_recording()) {
-        int sec = recorder_get_duration_sec();
-        char buf[16];
-        snprintf(buf, sizeof(buf), "%02d:%02d", sec / 60, sec % 60);
-        lv_label_set_text(g_timer_label, buf);
-        lv_obj_clear_flag(g_timer_label, LV_OBJ_FLAG_HIDDEN);
-    } else {
-        lv_obj_add_flag(g_timer_label, LV_OBJ_FLAG_HIDDEN);
+    // Recording timer
+    if (g_timer_label) {
+        if (recorder_is_recording()) {
+            int sec = recorder_get_duration_sec();
+            char buf[16];
+            snprintf(buf, sizeof(buf), "%02d:%02d", sec / 60, sec % 60);
+            lv_label_set_text(g_timer_label, buf);
+            lv_obj_clear_flag(g_timer_label, LV_OBJ_FLAG_HIDDEN);
+        } else {
+            lv_obj_add_flag(g_timer_label, LV_OBJ_FLAG_HIDDEN);
+        }
     }
+
 }
 
 static void update_button_style() {
@@ -244,24 +247,38 @@ int lvgl_ui_init(int hor_res, int ver_res, int rotation) {
     }
 
     // Touch input via evdev (grabbed exclusively to prevent desktop interference)
-    auto try_evdev = [](const char *dev) -> lv_indev_t * {
-        int fd = open(dev, O_RDWR | O_NOCTTY | O_CLOEXEC);
-        if (fd < 0) return nullptr;
-        ioctl(fd, EVIOCGRAB, 1); // grab device so desktop won't receive events
-        lv_indev_t *indev = lv_evdev_create_fd(LV_INDEV_TYPE_POINTER, fd);
-        if (!indev) close(fd);
-        else printf("lvgl: evdev %s (grabbed)\n", dev);
-        return indev;
+    lv_indev_t *indev = nullptr;
+    const char *evdev_candidates[] = {
+        "/dev/input/touchscreen0",
+        "/dev/input/event0", "/dev/input/event1", "/dev/input/event2",
+        "/dev/input/event3", "/dev/input/event4", "/dev/input/event5",
+        "/dev/input/event6", "/dev/input/event7",
     };
-    lv_indev_t *indev = try_evdev("/dev/input/touchscreen0");
-    if (!indev) indev = try_evdev("/dev/input/event0");
-    if (!indev) indev = try_evdev("/dev/input/event1");
-    if (!indev) indev = try_evdev("/dev/input/event2");
+    for (auto dev : evdev_candidates) {
+        int fd = open(dev, O_RDWR | O_NOCTTY | O_CLOEXEC);
+        if (fd < 0) continue;
+        ioctl(fd, EVIOCGRAB, 1);
+        indev = lv_evdev_create_fd(LV_INDEV_TYPE_NONE, fd);
+        if (indev && lv_indev_get_type(indev) != LV_INDEV_TYPE_POINTER) {
+            printf("lvgl: evdev %s type=%d (not pointer), skipping\n", dev, lv_indev_get_type(indev));
+            lv_indev_delete(indev);
+            indev = nullptr;
+            continue;
+        }
+        if (indev) {
+            printf("lvgl: evdev opened %s (pointer, grabbed)\n", dev);
+            break;
+        }
+        close(fd);
+    }
     if (!indev) {
         fprintf(stderr, "lvgl: evdev init failed, touch disabled\n");
     }
 
     create_ui();
+
+
+
     g_inited = true;
     return 0;
 }
