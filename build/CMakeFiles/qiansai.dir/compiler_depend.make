@@ -193,6 +193,21 @@ CMakeFiles/qiansai.dir/lvgl_ui.cpp.o: ../lvgl_ui.cpp \
   /usr/include/c++/11/limits \
   /usr/include/c++/11/ctime \
   /usr/include/c++/11/bits/parse_numbers.h \
+  /usr/include/fcntl.h \
+  /usr/include/aarch64-linux-gnu/bits/fcntl.h \
+  /usr/include/aarch64-linux-gnu/bits/fcntl-linux.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h \
+  /usr/include/linux/falloc.h \
+  /usr/include/aarch64-linux-gnu/bits/stat.h \
+  /usr/include/aarch64-linux-gnu/bits/struct_stat.h \
+  /usr/include/unistd.h \
+  /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
+  /usr/include/aarch64-linux-gnu/bits/environments.h \
+  /usr/include/aarch64-linux-gnu/bits/confname.h \
+  /usr/include/aarch64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/aarch64-linux-gnu/bits/getopt_core.h \
+  /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/linux/close_range.h \
   ../3rdparty/lvgl/include/lvgl/lvgl.h \
   ../3rdparty/lvgl/include/lvgl/lv_version.h \
   ../3rdparty/lvgl/include/lvgl/3d/lv_3dmath.h \
@@ -602,7 +617,29 @@ CMakeFiles/qiansai.dir/lvgl_ui.cpp.o: ../lvgl_ui.cpp \
   ../3rdparty/lvgl/include/lvgl/widgets/lv_tileview.h \
   ../3rdparty/lvgl/include/lvgl/widgets/lv_win.h \
   ../3rdparty/lvgl/include/lvgl/drivers/display/lv_linux_drm.h \
-  ../3rdparty/lvgl/include/lvgl/drivers/indev/lv_evdev.h
+  ../3rdparty/lvgl/include/lvgl/drivers/indev/lv_evdev.h \
+  /usr/include/aarch64-linux-gnu/sys/ioctl.h \
+  /usr/include/aarch64-linux-gnu/bits/ioctls.h \
+  /usr/include/aarch64-linux-gnu/asm/ioctls.h \
+  /usr/include/asm-generic/ioctls.h \
+  /usr/include/linux/ioctl.h \
+  /usr/include/aarch64-linux-gnu/asm/ioctl.h \
+  /usr/include/asm-generic/ioctl.h \
+  /usr/include/aarch64-linux-gnu/bits/ioctl-types.h \
+  /usr/include/aarch64-linux-gnu/sys/ttydefaults.h \
+  /usr/include/linux/input.h \
+  /usr/include/aarch64-linux-gnu/sys/time.h \
+  /usr/include/linux/types.h \
+  /usr/include/aarch64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/aarch64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/aarch64-linux-gnu/asm/posix_types.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/linux/input-event-codes.h
 
 CMakeFiles/qiansai.dir/main.cpp.o: ../main.cpp \
   /usr/include/stdc-predef.h \
@@ -1736,14 +1773,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/termios.h:
 
-/usr/include/aarch64-linux-gnu/bits/struct_stat.h:
-
-/usr/include/linux/falloc.h:
-
-/usr/include/aarch64-linux-gnu/bits/fcntl.h:
-
-/usr/include/fcntl.h:
-
 /usr/include/c++/11/mutex:
 
 /usr/include/gstreamer-1.0/gst/app/app-enumtypes.h:
@@ -1751,10 +1780,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/gstreamer-1.0/gst/base/gstpushsrc.h:
 
 ../recorder.cpp:
-
-/usr/include/aarch64-linux-gnu/sys/ttydefaults.h:
-
-../serial_port.h:
 
 ../3rdparty/rknn_model_zoo/utils/image_utils.h:
 
@@ -1910,10 +1935,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/glib-2.0/gobject/gvaluearray.h:
 
-/usr/include/aarch64-linux-gnu/bits/fcntl-linux.h:
-
-/usr/include/glib-2.0/gobject/gtypeplugin.h:
-
 /usr/include/c++/11/bits/nested_exception.h:
 
 /usr/include/glib-2.0/gobject/gtypemodule.h:
@@ -1952,8 +1973,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/glib-2.0/glib/guri.h:
 
-/usr/include/glib-2.0/glib/gtree.h:
-
 /usr/include/glib-2.0/glib/gtrashstack.h:
 
 /usr/include/glib-2.0/glib/gtimer.h:
@@ -1962,37 +1981,35 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/glib-2.0/glib/gtestutils.h:
 
-/usr/include/c++/11/tuple:
+/usr/include/glib-2.0/glib/gstrfuncs.h:
 
-../3rdparty/lvgl/include/lvgl/draw/lv_draw_rect.h:
+/usr/include/glib-2.0/glib/gspawn.h:
 
-/usr/include/glib-2.0/glib/deprecated/gcache.h:
+/usr/include/glib-2.0/glib/gshell.h:
 
-../3rdparty/lvgl/include/lvgl/3d/lv_gltf_model_node.h:
+/usr/include/glib-2.0/glib/gsequence.h:
 
-../3rdparty/lvgl/include/lvgl/core/lv_obj_style_gen.h:
+/usr/include/glib-2.0/glib/gscanner.h:
+
+/usr/include/glib-2.0/glib/grefcount.h:
 
 /usr/include/glib-2.0/glib/grand.h:
+
+/usr/include/glib-2.0/glib/gprimes.h:
+
+/usr/include/glib-2.0/glib/goption.h:
+
+/usr/include/glib-2.0/glib/gvarianttype.h:
 
 ../3rdparty/lvgl/include/lvgl/draw/lv_grad.h:
 
 /usr/include/aarch64-linux-gnu/bits/posix2_lim.h:
-
-../3rdparty/lvgl/include/lvgl/misc/lv_math.h:
-
-../3rdparty/lvgl/include/lvgl/api_map/lv_api_map_v9_0.h:
-
-../3rdparty/lvgl/include/lvgl/font/lv_font_manager.h:
 
 /usr/include/aarch64-linux-gnu/sys/ucontext.h:
 
 ../3rdparty/lvgl/include/lvgl/core/lv_style.h:
 
 ../3rdparty/lvgl/include/lvgl/core/lv_obj_tree.h:
-
-../3rdparty/lvgl/include/lvgl/layouts/lv_flex.h:
-
-../3rdparty/lvgl/include/lvgl/font/lv_imgfont.h:
 
 ../3rdparty/lvgl/include/lvgl/widgets/lv_buttonmatrix.h:
 
@@ -2016,6 +2033,14 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/draw/lv_palette.h:
 
+/usr/include/linux/input.h:
+
+../3rdparty/lvgl/include/lvgl/misc/lv_math.h:
+
+../3rdparty/lvgl/include/lvgl/api_map/lv_api_map_v9_0.h:
+
+../3rdparty/lvgl/include/lvgl/font/lv_font_manager.h:
+
 ../3rdparty/lvgl/include/lvgl/debugging/lv_assert.h:
 
 ../3rdparty/lvgl/include/lvgl/draw/lv_color_op.h:
@@ -2030,11 +2055,51 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/drivers/uefi/lv_uefi_gnu_efi.h:
 
+/usr/include/glib-2.0/glib/deprecated/gcache.h:
+
+../3rdparty/lvgl/include/lvgl/3d/lv_gltf_model_node.h:
+
+../3rdparty/lvgl/include/lvgl/draw/lv_draw_rect.h:
+
 ../3rdparty/lvgl/include/lvgl/lvgl.h:
 
 ../3rdparty/lvgl/include/lvgl/drivers/display/lv_renesas_glcdc.h:
 
 /usr/include/aarch64-linux-gnu/bits/waitflags.h:
+
+/usr/include/aarch64-linux-gnu/bits/getopt_core.h:
+
+../3rdparty/lvgl/include/lvgl/debugging/test/lv_test_fs.h:
+
+/usr/include/gstreamer-1.0/gst/gstcontext.h:
+
+/usr/include/aarch64-linux-gnu/bits/confname.h:
+
+/usr/include/gstreamer-1.0/gst/gstbufferpool.h:
+
+/usr/include/aarch64-linux-gnu/bits/environments.h:
+
+/usr/include/aarch64-linux-gnu/c++/11/bits/gthr-default.h:
+
+/usr/include/gstreamer-1.0/gst/gsttoc.h:
+
+/usr/include/limits.h:
+
+/usr/include/glib-2.0/glib/ghash.h:
+
+/usr/include/unistd.h:
+
+../3rdparty/lvgl/include/lvgl/core/lv_anim_timeline.h:
+
+/usr/include/c++/11/bits/stl_algobase.h:
+
+../3rdparty/lvgl/include/lvgl/indev/lv_indev.h:
+
+/usr/include/aarch64-linux-gnu/bits/struct_stat.h:
+
+../3rdparty/lvgl/include/lvgl/drivers/display/lv_tft_espi.h:
+
+/usr/include/aarch64-linux-gnu/c++/11/bits/os_defines.h:
 
 /usr/include/gstreamer-1.0/gst/gsttagsetter.h:
 
@@ -2062,9 +2127,19 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/c++/11/functional:
 
+/usr/include/linux/input-event-codes.h:
+
 /usr/include/aarch64-linux-gnu/bits/stdio_lim.h:
 
 ../3rdparty/lvgl/include/lvgl/3d/lv_gltf_model_loader.h:
+
+/usr/include/glib-2.0/gobject/gtypeplugin.h:
+
+/usr/include/aarch64-linux-gnu/bits/fcntl-linux.h:
+
+/usr/include/glib-2.0/glib/gpattern.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/__fpos64_t.h:
 
 ../3rdparty/lvgl/include/lvgl/api_map/lv_api_map_v9_5.h:
 
@@ -2091,6 +2166,8 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 ../3rdparty/lvgl/include/lvgl/widgets/lv_chart.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h:
+
+/usr/include/fcntl.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_tm.h:
 
@@ -2130,8 +2207,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/types/wint_t.h:
 
-/usr/include/glib-2.0/glib/gshell.h:
-
 ../3rdparty/lvgl/include/lvgl/lv_version.h:
 
 /usr/include/c++/11/cerrno:
@@ -2145,8 +2220,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/gstreamer-1.0/gst/gstenumtypes.h:
 
 /usr/include/c++/11/bits/localefwd.h:
-
-../3rdparty/lvgl/include/lvgl/debugging/profiler/lv_profiler.h:
 
 /usr/include/c++/11/bits/stl_pair.h:
 
@@ -2164,25 +2237,23 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/types/clock_t.h:
 
+/usr/include/linux/close_range.h:
+
 /usr/include/c++/11/bits/ostream.tcc:
 
 ../3rdparty/lvgl/include/lvgl/font/lv_text.h:
 
 ../3rdparty/lvgl/include/lvgl/core/lv_area.h:
 
-../3rdparty/lvgl/include/lvgl/widgets/lv_tileview.h:
-
 /usr/include/aarch64-linux-gnu/bits/unistd_ext.h:
+
+../3rdparty/lvgl/include/lvgl/widgets/lv_tileview.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 ../3rdparty/lvgl/include/lvgl/drivers/wayland/lv_wayland_touch.h:
 
 /usr/include/stdint.h:
-
-/usr/include/aarch64-linux-gnu/bits/termios-c_oflag.h:
-
-/usr/include/c++/11/bits/ptr_traits.h:
 
 /usr/include/c++/11/bits/erase_if.h:
 
@@ -2232,8 +2303,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/pthread.h:
 
-/usr/include/glib-2.0/glib/gsequence.h:
-
 /usr/include/endian.h:
 
 /usr/include/c++/11/bits/cpp_type_traits.h:
@@ -2241,10 +2310,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/c++/11/bits/streambuf.tcc:
 
 /usr/include/c++/11/bits/stl_iterator_base_funcs.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/mbstate_t.h:
-
-/usr/include/aarch64-linux-gnu/bits/posix_opt.h:
 
 /usr/include/c++/11/bits/exception_defines.h:
 
@@ -2258,8 +2323,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/c++/11/bits/hash_bytes.h:
 
-../3rdparty/lvgl/include/lvgl/config/lv_conf_kconfig.h:
-
 /usr/include/glib-2.0/glib/deprecated/gallocator.h:
 
 ../3rdparty/lvgl/include/lvgl/api_map/lv_api_map_v9_3.h:
@@ -2272,10 +2335,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/c++/11/clocale:
 
-/usr/include/aarch64-linux-gnu/bits/select.h:
-
-../3rdparty/lvgl/include/lvgl/draw/lv_draw.h:
-
 /usr/include/aarch64-linux-gnu/gnu/stubs.h:
 
 ../3rdparty/lvgl/include/lvgl/draw/lv_snapshot.h:
@@ -2286,11 +2345,13 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/widgets/lv_rlottie.h:
 
-/usr/include/glib-2.0/glib/grefcount.h:
-
 /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h:
 
 /usr/include/glib-2.0/glib/ghook.h:
+
+/usr/include/linux/falloc.h:
+
+/usr/include/c++/11/bits/postypes.h:
 
 /usr/include/c++/11/bits/uses_allocator.h:
 
@@ -2300,11 +2361,21 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/core/lv_matrix.h:
 
+/usr/include/glib-2.0/glib/gqueue.h:
+
+/usr/include/c++/11/ext/numeric_traits.h:
+
 /usr/include/gstreamer-1.0/gst/gstconfig.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/sigval_t.h:
 
 /usr/include/c++/11/bits/unordered_map.h:
+
+/usr/include/glib-2.0/glib/grcbox.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h:
+
+/usr/include/c++/11/array:
 
 ../3rdparty/lvgl/include/lvgl/drivers/indev/lv_libinput.h:
 
@@ -2320,7 +2391,13 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/widgets/lv_canvas.h:
 
-/usr/include/aarch64-linux-gnu/c++/11/bits/os_defines.h:
+/usr/include/c++/11/bits/stl_relops.h:
+
+/usr/include/aarch64-linux-gnu/bits/getopt_posix.h:
+
+/usr/include/glib-2.0/glib/gtree.h:
+
+/usr/include/aarch64-linux-gnu/asm/ioctl.h:
 
 ../3rdparty/lvgl/include/lvgl/config/lv_conf_internal.h:
 
@@ -2330,21 +2407,7 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/aarch64-linux-gnu/c++/11/bits/cpu_defines.h:
 
-/usr/include/aarch64-linux-gnu/c++/11/bits/gthr-default.h:
-
-/usr/include/gstreamer-1.0/gst/gstbufferpool.h:
-
-/usr/include/aarch64-linux-gnu/bits/environments.h:
-
-/usr/include/gstreamer-1.0/gst/gsttoc.h:
-
-/usr/include/limits.h:
-
-/usr/include/glib-2.0/glib/ghash.h:
-
 /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h:
-
-../3rdparty/lvgl/include/lvgl/core/lv_obj_style.h:
 
 /usr/include/c++/11/ext/new_allocator.h:
 
@@ -2388,8 +2451,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/api_map/lv_api_map_v9_2.h:
 
-../3rdparty/lvgl/include/lvgl/core/lv_obj_scroll.h:
-
 /usr/include/gstreamer-1.0/gst/gstbuffer.h:
 
 /usr/include/glib-2.0/glib/gstringchunk.h:
@@ -2401,6 +2462,12 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/aarch64-linux-gnu/bits/posix1_lim.h:
 
 ../3rdparty/lvgl/include/lvgl/stdlib/lv_sprintf.h:
+
+/usr/include/c++/11/tuple:
+
+../3rdparty/lvgl/include/lvgl/draw/lv_draw.h:
+
+/usr/include/aarch64-linux-gnu/bits/select.h:
 
 /usr/include/c++/11/type_traits:
 
@@ -2418,13 +2485,13 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/drivers/display/lv_draw_eve_display.h:
 
+../serial_port.h:
+
+/usr/include/aarch64-linux-gnu/sys/ttydefaults.h:
+
 /usr/include/c++/11/ext/atomicity.h:
 
 /usr/include/glib-2.0/glib/gatomic.h:
-
-/usr/include/glib-2.0/glib/gcharset.h:
-
-/usr/include/c++/11/bits/stl_function.h:
 
 /usr/include/c++/11/bits/memoryfwd.h:
 
@@ -2468,6 +2535,8 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/c++/11/bits/std_function.h:
 
+/usr/include/linux/ioctl.h:
+
 /usr/include/aarch64-linux-gnu/asm/errno.h:
 
 ../3rdparty/lvgl/include/lvgl/debugging/test/lv_test_helpers.h:
@@ -2491,14 +2560,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/c++/11/bits/charconv.h:
 
 ../3rdparty/lvgl/include/lvgl/drivers/display/lv_st7796.h:
-
-../3rdparty/lvgl/include/lvgl/core/lv_anim_timeline.h:
-
-/usr/include/c++/11/bits/stl_algobase.h:
-
-../3rdparty/lvgl/include/lvgl/indev/lv_indev.h:
-
-/usr/include/unistd.h:
 
 /usr/include/c++/11/bits/algorithmfwd.h:
 
@@ -2553,6 +2614,16 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/aarch64-linux-gnu/bits/types/FILE.h:
 
 /usr/include/aarch64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/mbstate_t.h:
+
+/usr/include/aarch64-linux-gnu/bits/posix_opt.h:
+
+/usr/include/glib-2.0/glib/gslice.h:
+
+../3rdparty/lvgl/include/lvgl/layouts/lv_grid.h:
+
+/usr/include/aarch64-linux-gnu/bits/fcntl.h:
 
 /usr/include/c++/11/backward/binders.h:
 
@@ -2612,10 +2683,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/setjmp.h:
 
-../3rdparty/lvgl/include/lvgl/core/lv_style_gen.h:
-
-../3rdparty/lvgl/include/lvgl/drivers/nuttx/lv_nuttx_fbdev.h:
-
 /usr/include/aarch64-linux-gnu/asm/posix_types.h:
 
 /usr/include/aarch64-linux-gnu/bits/types.h:
@@ -2623,12 +2690,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 ../3rdparty/lvgl/include/lvgl/layouts/lv_layout.h:
 
 /usr/include/aarch64-linux-gnu/bits/struct_mutex.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/__fpos64_t.h:
-
-/usr/include/glib-2.0/glib/gpattern.h:
-
-/usr/include/glib-2.0/glib/gstrfuncs.h:
 
 /usr/include/aarch64-linux-gnu/bits/time64.h:
 
@@ -2638,6 +2699,8 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/time.h:
 
+/usr/include/aarch64-linux-gnu/sys/ioctl.h:
+
 /usr/include/c++/11/bits/functexcept.h:
 
 ../3rdparty/lvgl/include/lvgl/misc/lv_array.h:
@@ -2645,10 +2708,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/aarch64-linux-gnu/bits/stdlib-float.h:
 
 ../3rdparty/lvgl/include/lvgl/image/lv_tjpgd.h:
-
-../3rdparty/lvgl/include/lvgl/draw/lv_draw_label.h:
-
-/usr/include/c++/11/bits/stringfwd.h:
 
 /usr/include/glib-2.0/glib/gthread.h:
 
@@ -2660,8 +2719,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/c++/11/bits/char_traits.h:
 
-/usr/include/c++/11/bits/postypes.h:
-
 /usr/include/c++/11/cwchar:
 
 ../3rdparty/lvgl/include/lvgl/widgets/lv_keyboard.h:
@@ -2669,6 +2726,32 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 ../3rdparty/lvgl/include/lvgl/themes/lv_theme_simple.h:
 
 /usr/include/wchar.h:
+
+../3rdparty/lvgl/include/lvgl/layouts/lv_flex.h:
+
+../3rdparty/lvgl/include/lvgl/font/lv_imgfont.h:
+
+../3rdparty/lvgl/include/lvgl/drivers/nuttx/lv_nuttx_fbdev.h:
+
+../3rdparty/lvgl/include/lvgl/core/lv_style_gen.h:
+
+/usr/include/c++/11/bits/stl_function.h:
+
+/usr/include/glib-2.0/glib/gcharset.h:
+
+../3rdparty/lvgl/include/lvgl/core/lv_obj_scroll.h:
+
+../3rdparty/lvgl/include/lvgl/core/lv_obj_style.h:
+
+../3rdparty/lvgl/include/lvgl/core/lv_obj_style_gen.h:
+
+../3rdparty/lvgl/include/lvgl/debugging/profiler/lv_profiler.h:
+
+/usr/include/c++/11/bits/stringfwd.h:
+
+../3rdparty/lvgl/include/lvgl/draw/lv_draw_label.h:
+
+../3rdparty/lvgl/include/lvgl/config/lv_conf_kconfig.h:
 
 ../3rdparty/lvgl/include/lvgl/draw/lv_draw_line.h:
 
@@ -2708,10 +2791,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/debugging/test/lv_test.h:
 
-../3rdparty/lvgl/include/lvgl/debugging/test/lv_test_fs.h:
-
-/usr/include/aarch64-linux-gnu/bits/getopt_core.h:
-
 ../3rdparty/lvgl/include/lvgl/lv_types.h:
 
 /usr/include/c++/11/bits/std_abs.h:
@@ -2725,8 +2804,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/aarch64-linux-gnu/asm/sigcontext.h:
 
 ../3rdparty/lvgl/include/lvgl/debugging/test/lv_test_screenshot_compare.h:
-
-/usr/include/glib-2.0/glib/gspawn.h:
 
 /usr/include/aarch64-linux-gnu/sys/time.h:
 
@@ -2756,8 +2833,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/glib-2.0/glib/glist.h:
 
-../3rdparty/lvgl/include/lvgl/drivers/display/lv_tft_espi.h:
-
 ../3rdparty/lvgl/include/lvgl/core/lv_obj_draw.h:
 
 ../3rdparty/lvgl/include/lvgl/drivers/ffmpeg/lv_ffmpeg.h:
@@ -2773,8 +2848,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/glib-2.0/glib/deprecated/gmain.h:
 
 /usr/include/glib-2.0/glib/gbase64.h:
-
-/usr/include/glib-2.0/glib/gvarianttype.h:
 
 ../3rdparty/lvgl/include/lvgl/drivers/opengles/lv_opengles_glfw.h:
 
@@ -2824,9 +2897,9 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/drivers/uefi/lv_uefi_display.h:
 
-/usr/include/aarch64-linux-gnu/bits/timex.h:
-
 /usr/include/glib-2.0/glib/gqsort.h:
+
+/usr/include/aarch64-linux-gnu/bits/timex.h:
 
 ../3rdparty/lvgl/include/lvgl/drivers/uefi/lv_uefi_edk2.h:
 
@@ -2845,6 +2918,8 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 ../3rdparty/lvgl/include/lvgl/drivers/wayland/lv_wayland_keyboard.h:
 
 ../3rdparty/lvgl/include/lvgl/indev/lv_indev_gesture.h:
+
+/usr/include/asm-generic/ioctl.h:
 
 ../3rdparty/lvgl/include/lvgl/drivers/wayland/lv_wayland_pointer.h:
 
@@ -3002,6 +3077,26 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 ../3rdparty/lvgl/include/lvgl/widgets/lv_win.h:
 
+/usr/include/c++/11/bits/stl_bvector.h:
+
+/usr/include/glib-2.0/glib/gbacktrace.h:
+
+/usr/include/aarch64-linux-gnu/bits/termios-c_oflag.h:
+
+/usr/include/c++/11/bits/ptr_traits.h:
+
+/usr/include/aarch64-linux-gnu/asm/ioctls.h:
+
+/usr/include/asm-generic/ioctls.h:
+
+/usr/include/aarch64-linux-gnu/bits/ioctl-types.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/asm-generic/posix_types.h:
+
 /usr/include/glib-2.0/glib.h:
 
 /usr/include/glib-2.0/glib/gtypes.h:
@@ -3009,6 +3104,8 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/gstreamer-1.0/gst/gstbufferlist.h:
 
 /usr/lib/aarch64-linux-gnu/glib-2.0/include/glibconfig.h:
+
+/usr/include/aarch64-linux-gnu/bits/ioctls.h:
 
 /usr/include/glib-2.0/glib/gmacros.h:
 
@@ -3021,10 +3118,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/glib-2.0/glib/gutils.h:
 
 /usr/include/c++/11/stdlib.h:
-
-/usr/include/c++/11/bits/stl_bvector.h:
-
-/usr/include/glib-2.0/glib/gbacktrace.h:
 
 /usr/include/glib-2.0/gobject/gbinding.h:
 
@@ -3056,14 +3149,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/sigaction.h:
 
-/usr/include/glib-2.0/glib/gprimes.h:
-
-/usr/include/linux/types.h:
-
-/usr/include/linux/posix_types.h:
-
-/usr/include/asm-generic/posix_types.h:
-
 /usr/include/aarch64-linux-gnu/sys/user.h:
 
 /usr/include/aarch64-linux-gnu/bits/procfs.h:
@@ -3076,21 +3161,7 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/sigstksz.h:
 
-/usr/include/gstreamer-1.0/gst/gstcontext.h:
-
-/usr/include/aarch64-linux-gnu/bits/confname.h:
-
-/usr/include/c++/11/bits/stl_relops.h:
-
-/usr/include/aarch64-linux-gnu/bits/getopt_posix.h:
-
-/usr/include/linux/close_range.h:
-
 /usr/include/aarch64-linux-gnu/bits/ss_flags.h:
-
-/usr/include/c++/11/ext/numeric_traits.h:
-
-/usr/include/glib-2.0/glib/gqueue.h:
 
 /usr/include/glib-2.0/glib/gerror.h:
 
@@ -3099,8 +3170,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 ../3rdparty/lvgl/include/lvgl/core/lv_obj_pos.h:
 
 /usr/include/glib-2.0/glib/gbitlock.h:
-
-/usr/include/glib-2.0/glib/goption.h:
 
 /usr/include/glib-2.0/glib/gbookmarkfile.h:
 
@@ -3117,12 +3186,6 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 ../3rdparty/lvgl/include/lvgl/widgets/lv_roller.h:
 
 /usr/include/aarch64-linux-gnu/bits/dirent.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h:
-
-/usr/include/c++/11/array:
-
-/usr/include/glib-2.0/glib/grcbox.h:
 
 /usr/include/glib-2.0/glib/genviron.h:
 
@@ -3163,9 +3226,3 @@ CMakeFiles/qiansai.dir/serial_port.cpp.o: ../serial_port.cpp \
 /usr/include/aarch64-linux-gnu/bits/types/__FILE.h:
 
 /usr/include/glib-2.0/glib/gmessages.h:
-
-/usr/include/glib-2.0/glib/gscanner.h:
-
-../3rdparty/lvgl/include/lvgl/layouts/lv_grid.h:
-
-/usr/include/glib-2.0/glib/gslice.h:

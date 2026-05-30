@@ -70,8 +70,12 @@ int main(int argc, char *argv[])
     recorder_init("/tmp");
 
     // Init LVGL UI (takes over DRM display, replacing kmssink)
-    lvgl_ui_init(0, 0, 0);
+    int lvgl_rotation = 0;
+    const char *env_lvgl_rot = getenv("LVGL_ROTATION");
+    if (env_lvgl_rot) lvgl_rotation = atoi(env_lvgl_rot);
+    lvgl_ui_init(0, 0, lvgl_rotation);
 
+    // AI uses the original (unrotated) frame; display rotation is done in software
     const std::string cam_pipe =
         "v4l2src device=/dev/video0 do-timestamp=true ! "
         "video/x-raw,width=800,height=480,framerate=30/1 ! "

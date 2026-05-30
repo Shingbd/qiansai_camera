@@ -25,18 +25,54 @@ void lvgl_ui_set_on_rec_start(std::function<void()> cb) { g_on_rec_start = std::
 void lvgl_ui_set_on_rec_stop(std::function<void()> cb)  { g_on_rec_stop  = std::move(cb); }
 
 // ---------------------------------------------------------------------------
-// NV12 → RGB565 conversion
+// NV12 → RGB565 conversion with optional rotation
 // ---------------------------------------------------------------------------
 static uint8_t *g_rgb_buf = nullptr;
+static int g_cam_rotation = 90;
+static bool g_cam_mirror_h = true;
 
-static void nv12_to_rgb565(const uint8_t *nv12, uint16_t *rgb, int w, int h) {
+void lvgl_ui_set_cam_rotation(int rot) {
+    if (rot == 0 || rot == 90 || rot == 180 || rot == 270)
+        g_cam_rotation = rot;
+}
+
+void lvgl_ui_set_cam_mirror_h(bool on) {
+    g_cam_mirror_h = on;
+}
+
+static void nv12_to_rgb565(const uint8_t *nv12, uint16_t *rgb, int w, int h, int rotation, bool mirror_h) {
     const uint8_t *y_plane = nv12;
     const uint8_t *uv_plane = nv12 + w * h;
-    for (int j = 0; j < h; j++) {
-        for (int i = 0; i < w; i++) {
-            int yi = j * w + i;
-            int ui = (j / 2) * w + (i / 2) * 2;
-            int vy  = (j / 2) * w + (i / 2) * 2 + 1;
+
+    int w_out = (rotation == 90 || rotation == 270) ? h : w;
+    int h_out = (rotation == 90 || rotation == 270) ? w : h;
+
+    for (int j = 0; j < h_out; j++) {
+        for (int i = 0; i < w_out; i++) {
+            int src_x, src_y;
+            switch (rotation) {
+                case 90:
+                    src_x = j;
+                    src_y = i;
+                    break;
+                case 180:
+                    src_x = w - 1 - i;
+                    src_y = h - 1 - j;
+                    break;
+                case 270:
+                    src_x = j;
+                    src_y = h - 1 - i;
+                    break;
+                default:
+                    src_x = i;
+                    src_y = j;
+                    break;
+            }
+            if (mirror_h) src_x = w - 1 - src_x;
+
+            int yi = src_y * w + src_x;
+            int ui = (src_y / 2) * w + (src_x / 2) * 2;
+            int vy  = (src_y / 2) * w + (src_x / 2) * 2 + 1;
             int Y = y_plane[yi];
             int U = uv_plane[ui] - 128;
             int V = uv_plane[vy] - 128;
@@ -49,7 +85,7 @@ static void nv12_to_rgb565(const uint8_t *nv12, uint16_t *rgb, int w, int h) {
             if (g < 0) g = 0; if (g > 255) g = 255;
             if (b < 0) b = 0; if (b > 255) b = 255;
 
-            rgb[yi] = (uint16_t)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3));
+            rgb[j * w_out + i] = (uint16_t)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3));
         }
     }
 }
@@ -155,7 +191,6 @@ static void create_ui() {
 static bool g_inited = false;
 
 int lvgl_ui_init(int hor_res, int ver_res, int rotation) {
-    (void)rotation;
     if (g_inited) return 0;
 
     lv_init();
@@ -182,11 +217,19 @@ int lvgl_ui_init(int hor_res, int ver_res, int rotation) {
         lv_display_set_resolution(disp, hor_res, ver_res);
     }
 
+    if (rotation != 0 && rotation != 90 && rotation != 180 && rotation != 270) {
+        fprintf(stderr, "lvgl: invalid rotation %d, using 0\n", rotation);
+        rotation = 0;
+    }
+    if (rotation != 0) {
+        lv_display_set_rotation(disp, (lv_display_rotation_t)rotation);
+    }
+
     lv_display_set_default(disp);
 
     g_disp_w = lv_display_get_horizontal_resolution(disp);
     g_disp_h = lv_display_get_vertical_resolution(disp);
-    printf("lvgl: drm display %dx%d\n", g_disp_w, g_disp_h);
+    printf("lvgl: drm display %dx%d rotation=%d\n", g_disp_w, g_disp_h, rotation);
 
     // Pre-allocate RGB565 buffer
     if (!g_rgb_buf) {
@@ -225,7 +268,7 @@ int lvgl_ui_init(int hor_res, int ver_res, int rotation) {
 
 void lvgl_ui_update_frame(const uint8_t *nv12_data, int w, int h) {
     if (!g_inited || !nv12_data) return;
-    nv12_to_rgb565(nv12_data, (uint16_t *)g_rgb_buf, w, h);
+    nv12_to_rgb565(nv12_data, (uint16_t *)g_rgb_buf, w, h, g_cam_rotation, g_cam_mirror_h);
     lv_image_set_src(g_cam_img, &g_cam_dsc);
 }
 

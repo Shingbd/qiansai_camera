@@ -92,9 +92,16 @@ static void create_test_ui() {
 
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
+
+    int rotation = 0;
+    if (argc >= 2) rotation = atoi(argv[1]);
+    if (rotation != 0 && rotation != 90 && rotation != 180 && rotation != 270) {
+        fprintf(stderr, "invalid rotation %d, using 0\n", rotation);
+        rotation = 0;
+    }
 
     lv_init();
 
@@ -115,6 +122,10 @@ int main() {
         return 1;
     }
     lv_free(drm_path);
+
+    if (rotation != 0) {
+        lv_display_set_rotation(disp, (lv_display_rotation_t)rotation);
+    }
 
     lv_display_set_default(disp);
 
