@@ -3,6 +3,7 @@ project(qiansai C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+option(ENABLE_LVGL_UI "Enable LVGL touch UI with recording" ON)
 
 if (NOT TARGET_SOC)
     set(TARGET_SOC "rk3588" CACHE STRING "NPU platform target")
@@ -36,7 +37,21 @@ target_include_directories(retinaface PUBLIC
 
 target_link_libraries(retinaface fileutils imageutils)
 
-add_executable(${PROJECT_NAME} main.cpp serial_port.cpp)
+set(qiansai_sources main.cpp serial_port.cpp)
+
+if (ENABLE_LVGL_UI)
+    list(APPEND qiansai_sources lvgl_ui.cpp recorder.cpp)
+endif()
+
+if (ENABLE_LVGL_UI)
+    set(CONFIG_LV_USE_LINUX_DRM ON CACHE BOOL "Enable Linux DRM driver")
+    set(CONFIG_LV_USE_EVDEV ON CACHE BOOL "Enable evdev input driver")
+    set(CONFIG_LV_BUILD_EXAMPLES OFF CACHE BOOL "Build LVGL examples")
+    set(CONFIG_LV_BUILD_DEMOS OFF CACHE BOOL "Build LVGL demos")
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/lvgl lvgl_build)
+endif()
+
+add_executable(${PROJECT_NAME} ${qiansai_sources})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${GST_INCLUDE_DIRS}
@@ -58,6 +73,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     m
     Threads::Threads
 )
+
+if (ENABLE_LVGL_UI)
+    target_link_libraries(${PROJECT_NAME} PRIVATE lvgl::lvgl)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE USE_EVDEV=1)
+endif()
 
 target_compile_options(${PROJECT_NAME} PRIVATE
     ${GST_CFLAGS_OTHER}

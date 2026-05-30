@@ -1,0 +1,15 @@
+/Users/shingbd/workspace/qiansai/test_lvgl/build/CMakeFiles/test_lvgl.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/CMakeFiles/edit_cache.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/CMakeFiles/rebuild_cache.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/CMakeFiles/list_install_components.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/CMakeFiles/install.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/CMakeFiles/install/local.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/CMakeFiles/install/strip.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/lvgl.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/lvgl_thorvg.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/edit_cache.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/rebuild_cache.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/list_install_components.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/install.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/install/local.dir
+/Users/shingbd/workspace/qiansai/test_lvgl/build/lvgl_build/CMakeFiles/install/strip.dir

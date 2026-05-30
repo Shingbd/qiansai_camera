@@ -291,10 +291,6 @@ CMakeFiles/qiansai.dir/main.cpp.o: \
  /usr/include/gstreamer-1.0/gst/base/gstbasesink.h \
  /usr/include/gstreamer-1.0/gst/base/base-prelude.h \
  /usr/include/gstreamer-1.0/gst/app/app-prelude.h \
- /usr/include/gstreamer-1.0/gst/app/gstappsrc.h \
- /usr/include/gstreamer-1.0/gst/base/gstpushsrc.h \
- /usr/include/gstreamer-1.0/gst/base/gstbasesrc.h \
- /usr/include/gstreamer-1.0/gst/app/app-enumtypes.h \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
  /usr/include/c++/11/bits/stringfwd.h \
@@ -396,4 +392,23 @@ CMakeFiles/qiansai.dir/main.cpp.o: \
  /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/image_utils.h \
  /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/common.h \
  /Users/shingbd/workspace/qiansai/3rdparty/rknn_model_zoo/utils/image_drawing.h \
- /Users/shingbd/workspace/qiansai/serial_port.h
+ /Users/shingbd/workspace/qiansai/serial_port.h \
+ /Users/shingbd/workspace/qiansai/lvgl_ui.h \
+ /usr/include/c++/11/functional /usr/include/c++/11/bits/std_function.h \
+ /usr/include/c++/11/unordered_map \
+ /usr/include/c++/11/ext/aligned_buffer.h \
+ /usr/include/c++/11/bits/hashtable.h \
+ /usr/include/c++/11/bits/hashtable_policy.h \
+ /usr/include/c++/11/bits/enable_special_members.h \
+ /usr/include/c++/11/bits/node_handle.h \
+ /usr/include/c++/11/bits/unordered_map.h \
+ /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc /usr/include/c++/11/bits/stl_algo.h \
+ /usr/include/c++/11/bits/algorithmfwd.h \
+ /usr/include/c++/11/bits/stl_heap.h \
+ /usr/include/c++/11/bits/stl_tempbuf.h \
+ /usr/include/c++/11/bits/uniform_int_dist.h \
+ /Users/shingbd/workspace/qiansai/recorder.h

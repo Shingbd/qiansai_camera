@@ -7,12 +7,22 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+  "../3rdparty/lvgl/CMakeLists.txt"
+  "../3rdparty/lvgl/env_support/cmake/dependencies.cmake"
+  "../3rdparty/lvgl/env_support/cmake/dependencies/drm.cmake"
+  "../3rdparty/lvgl/env_support/cmake/dependencies/evdev.cmake"
+  "../3rdparty/lvgl/env_support/cmake/main.cmake"
+  "../3rdparty/lvgl/env_support/cmake/version.cmake"
+  "../3rdparty/lvgl/lv_version.h.in"
+  "../3rdparty/lvgl/lvgl.pc.in"
   "../3rdparty/rknn_model_zoo/3rdparty/CMakeLists.txt"
   "../3rdparty/rknn_model_zoo/utils/CMakeLists.txt"
   "../CMakeLists.txt"
+  "CMakeFiles/3.22.1/CMakeASMCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
+  "/usr/share/cmake-3.22/Modules/CMakeASMInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake"
@@ -25,9 +35,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.22/Modules/CheckIncludeFile.cmake"
   "/usr/share/cmake-3.22/Modules/CheckLibraryExists.cmake"
   "/usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+  "/usr/share/cmake-3.22/Modules/Compiler/GNU-ASM.cmake"
   "/usr/share/cmake-3.22/Modules/Compiler/GNU-C.cmake"
   "/usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake"
   "/usr/share/cmake-3.22/Modules/Compiler/GNU.cmake"
+  "/usr/share/cmake-3.22/Modules/FetchContent.cmake"
   "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
   "/usr/share/cmake-3.22/Modules/FindPkgConfig.cmake"
@@ -51,6 +63,9 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "3rdparty.out/CMakeFiles/CMakeDirectoryInformation.cmake"
   "utils.out/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "lvgl_build/lvgl.pc"
+  "lvgl_build/lv_version.h"
+  "lvgl_build/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -61,4 +76,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "utils.out/CMakeFiles/imagedrawing.dir/DependInfo.cmake"
   "utils.out/CMakeFiles/imageutils.dir/DependInfo.cmake"
   "utils.out/CMakeFiles/audioutils.dir/DependInfo.cmake"
+  "lvgl_build/CMakeFiles/lvgl.dir/DependInfo.cmake"
+  "lvgl_build/CMakeFiles/lvgl_thorvg.dir/DependInfo.cmake"
   )

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_lvgl.dir/main.cpp.o -o test_lvgl  lvgl_build/lib/liblvgl.a lvgl_build/lib/liblvgl_thorvg.a lvgl_build/lib/liblvgl.a lvgl_build/lib/liblvgl_thorvg.a /usr/lib/aarch64-linux-gnu/libdrm.so /usr/lib/aarch64-linux-gnu/libevdev.so 

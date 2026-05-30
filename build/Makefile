@@ -239,6 +239,32 @@ audioutils/fast:
 	$(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/build
 .PHONY : audioutils/fast
 
+#=============================================================================
+# Target rules for targets named lvgl
+
+# Build rule for target.
+lvgl: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lvgl
+.PHONY : lvgl
+
+# fast build rule for target.
+lvgl/fast:
+	$(MAKE) $(MAKESILENT) -f lvgl_build/CMakeFiles/lvgl.dir/build.make lvgl_build/CMakeFiles/lvgl.dir/build
+.PHONY : lvgl/fast
+
+#=============================================================================
+# Target rules for targets named lvgl_thorvg
+
+# Build rule for target.
+lvgl_thorvg: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lvgl_thorvg
+.PHONY : lvgl_thorvg
+
+# fast build rule for target.
+lvgl_thorvg/fast:
+	$(MAKE) $(MAKESILENT) -f lvgl_build/CMakeFiles/lvgl_thorvg.dir/build.make lvgl_build/CMakeFiles/lvgl_thorvg.dir/build
+.PHONY : lvgl_thorvg/fast
+
 3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.o: 3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.cc.o
 .PHONY : 3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.o
 
@@ -263,6 +289,30 @@ audioutils/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/retinaface.dir/build.make CMakeFiles/retinaface.dir/3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.cc.s
 .PHONY : 3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.cc.s
 
+lvgl_ui.o: lvgl_ui.cpp.o
+.PHONY : lvgl_ui.o
+
+# target to build an object file
+lvgl_ui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/lvgl_ui.cpp.o
+.PHONY : lvgl_ui.cpp.o
+
+lvgl_ui.i: lvgl_ui.cpp.i
+.PHONY : lvgl_ui.i
+
+# target to preprocess a source file
+lvgl_ui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/lvgl_ui.cpp.i
+.PHONY : lvgl_ui.cpp.i
+
+lvgl_ui.s: lvgl_ui.cpp.s
+.PHONY : lvgl_ui.s
+
+# target to generate assembly for a file
+lvgl_ui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/lvgl_ui.cpp.s
+.PHONY : lvgl_ui.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -286,6 +336,30 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+recorder.o: recorder.cpp.o
+.PHONY : recorder.o
+
+# target to build an object file
+recorder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/recorder.cpp.o
+.PHONY : recorder.cpp.o
+
+recorder.i: recorder.cpp.i
+.PHONY : recorder.i
+
+# target to preprocess a source file
+recorder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/recorder.cpp.i
+.PHONY : recorder.cpp.i
+
+recorder.s: recorder.cpp.s
+.PHONY : recorder.s
+
+# target to generate assembly for a file
+recorder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qiansai.dir/build.make CMakeFiles/qiansai.dir/recorder.cpp.s
+.PHONY : recorder.cpp.s
 
 serial_port.o: serial_port.cpp.o
 .PHONY : serial_port.o
@@ -327,14 +401,22 @@ help:
 	@echo "... fileutils"
 	@echo "... imagedrawing"
 	@echo "... imageutils"
+	@echo "... lvgl"
+	@echo "... lvgl_thorvg"
 	@echo "... qiansai"
 	@echo "... retinaface"
 	@echo "... 3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.o"
 	@echo "... 3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.i"
 	@echo "... 3rdparty/rknn_model_zoo/examples/RetinaFace/cpp/rknpu2/retinaface.s"
+	@echo "... lvgl_ui.o"
+	@echo "... lvgl_ui.i"
+	@echo "... lvgl_ui.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... recorder.o"
+	@echo "... recorder.i"
+	@echo "... recorder.s"
 	@echo "... serial_port.o"
 	@echo "... serial_port.i"
 	@echo "... serial_port.s"

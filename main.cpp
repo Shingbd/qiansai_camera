@@ -1,6 +1,5 @@
 #include <gst/gst.h>
 #include <gst/app/gstappsink.h>
-#include <gst/app/gstappsrc.h>
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -12,6 +11,8 @@
 #include "image_utils.h"
 #include "image_drawing.h"
 #include "serial_port.h"
+#include "lvgl_ui.h"
+#include "recorder.h"
 
 rknn_app_context_t g_rknn_ctx;
 int g_serial_fd = -1;
@@ -65,15 +66,17 @@ int main(int argc, char *argv[])
         std::cerr << "Warning: serial port init failed, continuing without serial" << std::endl;
     }
 
+    // Init recorder
+    recorder_init("/tmp");
+
+    // Init LVGL UI (takes over DRM display, replacing kmssink)
+    lvgl_ui_init(0, 0, 0);
+
     const std::string cam_pipe =
         "v4l2src device=/dev/video0 do-timestamp=true ! "
         "video/x-raw,width=800,height=480,framerate=30/1 ! "
         "videoconvert ! video/x-raw,format=NV12 ! "
         "appsink name=sink_ai max-buffers=1 drop=true";
-
-    const std::string display_pipe =
-        "appsrc name=local_src is-live=true format=time ! "
-        "videoflip method=counterclockwise ! kmssink sync=false";
 
     std::cout << "Camera pipeline: " << cam_pipe << std::endl;
 
@@ -85,30 +88,17 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    GstElement *display_pipeline = gst_parse_launch(display_pipe.c_str(), &err);
-    if (!display_pipeline) {
-        std::cerr << "Failed to create display pipeline: " << err->message << std::endl;
-        g_error_free(err);
-        return 1;
-    }
-
     GstElement *sink_ai = gst_bin_get_by_name(GST_BIN(cam_pipeline), "sink_ai");
-    GstElement *local_src = gst_bin_get_by_name(GST_BIN(display_pipeline), "local_src");
 
     auto loop = g_main_loop_new(nullptr, FALSE);
 
-    auto bus1 = gst_pipeline_get_bus(GST_PIPELINE(cam_pipeline));
-    gst_bus_add_watch(bus1, bus_call, loop);
-    gst_object_unref(bus1);
-
-    auto bus2 = gst_pipeline_get_bus(GST_PIPELINE(display_pipeline));
-    gst_bus_add_watch(bus2, bus_call, loop);
-    gst_object_unref(bus2);
+    auto bus = gst_pipeline_get_bus(GST_PIPELINE(cam_pipeline));
+    gst_bus_add_watch(bus, bus_call, loop);
+    gst_object_unref(bus);
 
     gst_element_set_state(cam_pipeline, GST_STATE_PLAYING);
-    gst_element_set_state(display_pipeline, GST_STATE_PLAYING);
 
-    std::thread([sink_ai, local_src]() {
+    std::thread([sink_ai]() {
         int frame_count = 0;
         auto last_time = std::chrono::steady_clock::now();
         int w = 0, h = 0, fps = 0;
@@ -127,15 +117,6 @@ int main(int argc, char *argv[])
                         std::cout << "Camera frame: " << w << "x" << h << std::endl;
                     }
                     gst_caps_unref(caps);
-                }
-                if (local_src) {
-                    GstCaps *src_caps = gst_caps_new_simple("video/x-raw",
-                        "format", G_TYPE_STRING, "NV12",
-                        "width", G_TYPE_INT, w,
-                        "height", G_TYPE_INT, h,
-                        NULL);
-                    gst_app_src_set_caps(GST_APP_SRC(local_src), src_caps);
-                    gst_caps_unref(src_caps);
                 }
             }
 
@@ -206,7 +187,6 @@ int main(int argc, char *argv[])
 
             if (g_serial_fd >= 0) {
                 serial_send_packet(g_serial_fd, x_diff, y_diff);
-                // loopback: read back and print
                 uint8_t rx_buf[SERIAL_PACKET_SIZE];
                 int n = 0;
                 while (n < SERIAL_PACKET_SIZE) {
@@ -223,24 +203,20 @@ int main(int argc, char *argv[])
                 }
             }
 
-            {
-                char fps_text[32];
-                snprintf(fps_text, 32, "FPS: %d", fps);
-                draw_text(&src_img, fps_text, 8, 8, COLOR_GREEN, 24);
+            // Show camera frame in LVGL (converts NV12 → RGB565 internally)
+            lvgl_ui_update_frame(info.data, w, h);
+            // Process LVGL: touch handling, timer, UI refresh
+            lvgl_ui_process();
+
+            // Push to recorder if recording
+            if (lvgl_ui_is_recording()) {
+                recorder_push_frame(info.data, w, h);
             }
 
             gst_buffer_unmap(buf, &info);
+            gst_buffer_unref(buf);
 
-            if (local_src) {
-                auto t_push = std::chrono::steady_clock::now();
-                GstFlowReturn ret = gst_app_src_push_buffer(GST_APP_SRC(local_src), buf);
-                auto push_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-                    std::chrono::steady_clock::now() - t_push).count();
-                if (push_ms > 5) std::cout << "push_blocked=" << push_ms << "ms" << std::endl;
-                if (ret == GST_FLOW_OK) frame_count++;
-            } else {
-                gst_buffer_unref(buf);
-            }
+            frame_count++;
             auto now = std::chrono::steady_clock::now();
             float elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_time).count() / 1000.f;
             if (elapsed >= 5.0f) {
@@ -259,11 +235,11 @@ int main(int argc, char *argv[])
 
     g_running = false;
     gst_element_set_state(cam_pipeline, GST_STATE_NULL);
-    gst_element_set_state(display_pipeline, GST_STATE_NULL);
     gst_object_unref(cam_pipeline);
-    gst_object_unref(display_pipeline);
     g_main_loop_unref(loop);
 
+    recorder_deinit();
+    lvgl_ui_deinit();
     serial_close(g_serial_fd);
     release_retinaface_model(&g_rknn_ctx);
 
